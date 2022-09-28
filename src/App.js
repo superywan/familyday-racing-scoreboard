@@ -83,7 +83,7 @@ class Record extends React.Component {
               ? "0 .8rem 1.5rem #C0C0C0"
               : this.props.index === 2
               ? "0 .5rem 1rem #b87333"
-              : "0 .5rem 1rem rgba(0,0,0 .15)",
+              : "",
         }}
       >
         <div className="card-body" style={{ width: "40rem" }}>
@@ -420,8 +420,8 @@ function App() {
       )}
 
       <div className="d-flex justify-content-between">
-        <div style={{ marginRight: "100px" }}>
-          {/* <h1 className="text-center fw-bold">형제 Brother</h1> */}
+        <div style={{ marginRight: "100px", width: "50%" }}>
+          <h1 className="text-center fw-bold pb-5">형제 Brother 👨🏻</h1>
           {brotherRecords.map((record, index) => {
             console.log(`BRO : ${record.name} (${record.time})`);
             return (
@@ -436,8 +436,8 @@ function App() {
           })}
         </div>
 
-        <div style={{ marginLeft: "100px" }}>
-          {/* <h1 className="text-center fw-bold">자매 Sister</h1> */}
+        <div style={{ marginLeft: "100px", width: "50%" }}>
+          <h1 className="text-center fw-bold pb-5">자매 Sister 👩🏻</h1>
           {sisterRecords.map((record, index) => {
             console.log(`SIS : ${record.name} (${record.time})`);
             return (
