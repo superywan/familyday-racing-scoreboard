@@ -74,7 +74,7 @@ class Record extends React.Component {
   render() {
     return (
       <div
-        className="card my-3  p-3 mb-5 bg-body rounded"
+        className="card my-3 py-2 px-3 mb-5 bg-body rounded"
         style={{
           boxShadow:
             this.props.index === 0
@@ -86,9 +86,9 @@ class Record extends React.Component {
               : "",
         }}
       >
-        <div className="card-body" style={{ width: "40rem" }}>
+        <div className="card-body" style={{ width: "30rem" }}>
           <div
-            className="card-title fs-2 fw-semibold"
+            className="card-title fs-3 fw-normal"
             onClick={() => this.props.handleDelete()}
           >
             {this.props.index === 0
@@ -99,7 +99,7 @@ class Record extends React.Component {
               ? `🥉 ${this.props.index + 1}등 ${this.props.name}`
               : `${this.props.index + 1}등 ${this.props.name}`}
           </div>
-          <div className="card-text fs-1 fw-light">
+          <div className="card-text fs-1 fw-semibold text-center">
             {`${new Date(this.props.time).getMinutes()}`.padStart(2, "0")}:
             {`${new Date(this.props.time).getSeconds()}`.padStart(2, "0")}:
             {`${new Date(this.props.time).getMilliseconds()}`.padStart(2, "0")}
@@ -238,13 +238,21 @@ function App() {
 
   return (
     <div className="App d-flex flex-column justify-content-center d-flex align-items-center">
-      <img
-        src={logo}
-        class="img-fluid"
-        alt="main-logo"
-        style={{ width: "400px", marginTop: "-35px" }}
-        onClick={toggleWindowPortal}
-      />
+      <div className="d-flex align-items-center">
+        <img
+          src={logo}
+          class="img-fluid"
+          alt="main-logo"
+          style={{ width: "300px" }}
+          onClick={toggleWindowPortal}
+        />
+        <div
+          className="display-3 fw-bold"
+          style={{ marginLeft: "-40px", marginRight: "40px" }}
+        >
+          가장 빠른 랩 타임 BEST LAP
+        </div>
+      </div>
 
       {isWindowPortalOpen && (
         <MyWindowPortal>
@@ -420,8 +428,8 @@ function App() {
       )}
 
       <div className="d-flex justify-content-between">
-        <div style={{ marginRight: "100px", width: "50%" }}>
-          <h1 className="text-center fw-bold pb-5">형제 Brother 👨🏻</h1>
+        <div style={{ marginRight: "100px" }}>
+          <div className="fs-3 text-center fw-bold pb-4">형제 Brother 👨🏻</div>
           {brotherRecords.map((record, index) => {
             console.log(`BRO : ${record.name} (${record.time})`);
             return (
@@ -436,8 +444,8 @@ function App() {
           })}
         </div>
 
-        <div style={{ marginLeft: "100px", width: "50%" }}>
-          <h1 className="text-center fw-bold pb-5">자매 Sister 👩🏻</h1>
+        <div style={{ marginLeft: "100px" }}>
+          <div className="fs-3 text-center fw-bold pb-4">자매 Sister 👩🏻</div>
           {sisterRecords.map((record, index) => {
             console.log(`SIS : ${record.name} (${record.time})`);
             return (
