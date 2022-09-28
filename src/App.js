@@ -73,7 +73,7 @@ class Record extends React.Component {
 
   render() {
     return (
-      <div className="card my-3">
+      <div className="card my-3 shadow p-3 mb-5 bg-body rounded">
         <div className="card-body" style={{ width: "40rem" }}>
           <div
             className="card-title fs-2 fw-semibold"
@@ -87,7 +87,7 @@ class Record extends React.Component {
               ? `🥉 ${this.props.index + 1}등 ${this.props.name}`
               : `${this.props.index + 1}등 ${this.props.name}`}
           </div>
-          <div className="card-text fs-1 fw-semibold">
+          <div className="card-text fs-1 fw-light">
             {`${new Date(this.props.time).getMinutes()}`.padStart(2, "0")}:
             {`${new Date(this.props.time).getSeconds()}`.padStart(2, "0")}:
             {`${new Date(this.props.time).getMilliseconds()}`.padStart(2, "0")}
@@ -407,9 +407,9 @@ function App() {
         </MyWindowPortal>
       )}
 
-      <div className="container-lg d-flex justify-content-between">
-        <div>
-          <h1 className="text-center fw-bold">형제 Brother</h1>
+      <div className="d-flex justify-content-between">
+        <div style={{ marginRight: "100px" }}>
+          {/* <h1 className="text-center fw-bold">형제 Brother</h1> */}
           {brotherRecords.map((record, index) => {
             console.log(`BRO : ${record.name} (${record.time})`);
             return (
@@ -424,8 +424,8 @@ function App() {
           })}
         </div>
 
-        <div>
-          <h1 className="text-center fw-bold">자매 Sister</h1>
+        <div style={{ marginLeft: "100px" }}>
+          {/* <h1 className="text-center fw-bold">자매 Sister</h1> */}
           {sisterRecords.map((record, index) => {
             console.log(`SIS : ${record.name} (${record.time})`);
             return (
