@@ -73,7 +73,19 @@ class Record extends React.Component {
 
   render() {
     return (
-      <div className="card my-3 shadow p-3 mb-5 bg-body rounded">
+      <div
+        className="card my-3  p-3 mb-5 bg-body rounded"
+        style={{
+          boxShadow:
+            this.props.index === 0
+              ? "0 .5rem 1rem rgba(255, 255, 0, 0.5)"
+              : this.props.index === 1
+              ? "0 .8rem 1.5rem #C0C0C0"
+              : this.props.index === 2
+              ? "0 .5rem 1rem #b87333"
+              : "0 .5rem 1rem rgba(0,0,0 .15)",
+        }}
+      >
         <div className="card-body" style={{ width: "40rem" }}>
           <div
             className="card-title fs-2 fw-semibold"
