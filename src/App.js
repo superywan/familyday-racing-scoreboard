@@ -250,7 +250,7 @@ function App() {
           className="display-3 fw-bold"
           style={{ marginLeft: "-40px", marginRight: "40px" }}
         >
-          가장 빠른 랩 타임 BEST LAP
+          BEST LAP
         </div>
       </div>
 
