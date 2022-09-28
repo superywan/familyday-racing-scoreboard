@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/familyday-racing-scoreboard/static/css/main.157628ad.css",
-    "main.js": "/familyday-racing-scoreboard/static/js/main.b16ee6d6.js",
+    "main.js": "/familyday-racing-scoreboard/static/js/main.9b565920.js",
     "static/js/787.9f34425b.chunk.js": "/familyday-racing-scoreboard/static/js/787.9f34425b.chunk.js",
     "static/media/logo.png": "/familyday-racing-scoreboard/static/media/logo.ea348f17ee5df3bd6fec.png",
     "index.html": "/familyday-racing-scoreboard/index.html",
     "main.157628ad.css.map": "/familyday-racing-scoreboard/static/css/main.157628ad.css.map",
-    "main.b16ee6d6.js.map": "/familyday-racing-scoreboard/static/js/main.b16ee6d6.js.map",
+    "main.9b565920.js.map": "/familyday-racing-scoreboard/static/js/main.9b565920.js.map",
     "787.9f34425b.chunk.js.map": "/familyday-racing-scoreboard/static/js/787.9f34425b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.157628ad.css",
-    "static/js/main.b16ee6d6.js"
+    "static/js/main.9b565920.js"
   ]
 }
