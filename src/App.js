@@ -26,190 +26,6 @@ function copyStyles(sourceDoc, targetDoc) {
   });
 }
 
-// function component
-const AnimatedCard = ({ animation, digit }) => {
-  return (
-    <div className={`flipCard ${animation}`}>
-      <span>{digit}</span>
-    </div>
-  );
-};
-
-// function component
-const StaticCard = ({ position, digit }) => {
-  return (
-    <div className={position}>
-      <span>{digit}</span>
-    </div>
-  );
-};
-
-// function component
-const FlipUnitContainer = ({ digit, shuffle, unit }) => {
-  // assign digit values
-  let currentDigit = digit;
-  let previousDigit = digit - 1;
-
-  // to prevent a negative value
-  if (unit !== "hours") {
-    previousDigit = previousDigit === -1 ? 59 : previousDigit;
-  } else {
-    previousDigit = previousDigit === -1 ? 23 : previousDigit;
-  }
-
-  // add zero
-  if (currentDigit < 10) {
-    currentDigit = `0${currentDigit}`;
-  }
-  if (previousDigit < 10) {
-    previousDigit = `0${previousDigit}`;
-  }
-
-  // shuffle digits
-  const digit1 = shuffle ? previousDigit : currentDigit;
-  const digit2 = !shuffle ? previousDigit : currentDigit;
-
-  // shuffle animations
-  const animation1 = shuffle ? "fold" : "unfold";
-  const animation2 = !shuffle ? "fold" : "unfold";
-
-  return (
-    <div className={"flipUnitContainer"}>
-      <StaticCard position={"upperCard"} digit={currentDigit} />
-      <StaticCard position={"lowerCard"} digit={previousDigit} />
-      <AnimatedCard digit={digit1} animation={animation1} />
-      <AnimatedCard digit={digit2} animation={animation2} />
-    </div>
-  );
-};
-
-// class component
-class FlipClock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      minutes: 0,
-      minutesShuffle: true,
-      seconds: 0,
-      secondsShuffle: true,
-      milliseconds: 0,
-      millisecondsShuffle: true,
-    };
-    this.updateTime = this.updateTime.bind(this);
-  }
-
-  componentDidMount() {
-    this.updateTime();
-  }
-
-  updateTime() {
-    // get new date
-    const time = new Date(this.props.time);
-
-    // set time units
-    const minutes = time.getMinutes();
-    const seconds = time.getSeconds();
-    const milliseconds = time.getMilliseconds();
-
-    // on minute chanage, update minutes and shuffle state
-    if (minutes !== this.state.minutes) {
-      const minutesShuffle = !this.state.minutesShuffle;
-      this.setState({
-        minutes,
-        minutesShuffle,
-      });
-    }
-    // on second chanage, update seconds and shuffle state
-    if (seconds !== this.state.seconds) {
-      const secondsShuffle = !this.state.secondsShuffle;
-      this.setState({
-        seconds,
-        secondsShuffle,
-      });
-    }
-    // on minute chanage, update minutes and shuffle state
-    if (milliseconds !== this.state.milliseconds) {
-      const millisecondsShuffle = !this.state.millisecondsShuffle;
-      this.setState({
-        milliseconds,
-        millisecondsShuffle,
-      });
-    }
-  }
-
-  render() {
-    // state object destructuring
-    const {
-      minutes,
-      seconds,
-      milliseconds,
-      minutesShuffle,
-      secondsShuffle,
-      millisecondsShuffle,
-    } = this.state;
-
-    return (
-      <div className={"flipClock"}>
-        <FlipUnitContainer
-          unit={"minutes"}
-          digit={minutes}
-          shuffle={minutesShuffle}
-        />
-        <div>:</div>
-        <FlipUnitContainer
-          unit={"seconds"}
-          digit={seconds}
-          shuffle={secondsShuffle}
-        />
-        <div>:</div>
-        <FlipUnitContainer
-          unit={"milliseconds"}
-          digit={milliseconds}
-          shuffle={millisecondsShuffle}
-        />
-      </div>
-    );
-  }
-}
-
-class Record extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="my-3">
-        <div className="d-flex justify-content-between">
-          <div className="ml-3" onClick={() => this.props.handleDelete()}>
-            {this.props.index === 0
-              ? `🥇 ${this.props.index + 1}등 ${this.props.name}`
-              : this.props.index === 1
-              ? `🥈 ${this.props.index + 1}등 ${this.props.name}`
-              : this.props.index === 2
-              ? `🥉 ${this.props.index + 1}등 ${this.props.name}`
-              : `${this.props.index + 1}등 ${this.props.name}`}
-          </div>
-          {/* <div>
-            <button
-              type="button"
-              className="btn btn-dark"
-              
-            >
-              🗑
-            </button>
-          </div> */}
-        </div>
-        <div>
-          {`${new Date(this.props.time).getMinutes()}`.padStart(2, "0")}:
-          {`${new Date(this.props.time).getSeconds()}`.padStart(2, "0")}:
-          {`${new Date(this.props.time).getMilliseconds()}`.padStart(2, "0")}
-        </div>
-      </div>
-    );
-  }
-}
-
 class MyWindowPortal extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -222,7 +38,7 @@ class MyWindowPortal extends React.PureComponent {
     this.externalWindow = window.open(
       "",
       "",
-      "width=600,height=400,left=200,top=200"
+      "width=600,height=650,left=200,top=200"
     );
 
     // STEP 4: append the container <div> (that has props.children appended to it) to the body of the new window
@@ -247,6 +63,38 @@ class MyWindowPortal extends React.PureComponent {
   render() {
     // STEP 2: append props.children to the container <div> that isn't mounted anywhere yet
     return ReactDOM.createPortal(this.props.children, this.containerEl);
+  }
+}
+
+class Record extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div className="card my-3">
+        <div className="card-body" style={{ width: "40rem" }}>
+          <div
+            className="card-title fs-2 fw-semibold"
+            onClick={() => this.props.handleDelete()}
+          >
+            {this.props.index === 0
+              ? `🥇 ${this.props.index + 1}등 ${this.props.name}`
+              : this.props.index === 1
+              ? `🥈 ${this.props.index + 1}등 ${this.props.name}`
+              : this.props.index === 2
+              ? `🥉 ${this.props.index + 1}등 ${this.props.name}`
+              : `${this.props.index + 1}등 ${this.props.name}`}
+          </div>
+          <div className="card-text fs-1 fw-semibold">
+            {`${new Date(this.props.time).getMinutes()}`.padStart(2, "0")}:
+            {`${new Date(this.props.time).getSeconds()}`.padStart(2, "0")}:
+            {`${new Date(this.props.time).getMilliseconds()}`.padStart(2, "0")}
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
@@ -364,7 +212,7 @@ function App() {
         JSON.stringify(filteredSisterRecords)
       );
 
-      setBrotherRecords(filteredSisterRecords);
+      setSisterRecords(filteredSisterRecords);
     }
   };
 
@@ -382,7 +230,7 @@ function App() {
         src={logo}
         class="img-fluid"
         alt="main-logo"
-        style={{ width: "15%" }}
+        style={{ width: "400px", marginTop: "-35px" }}
         onClick={toggleWindowPortal}
       />
 
@@ -391,15 +239,15 @@ function App() {
           <div className="container my-5">
             <div className="">
               <div className="">
-                <h2 className="" id="exampleModalLabel">
-                  Add a New Record
+                <h2 className="fw-bold" id="exampleModalLabel">
+                  새로운 레이싱 기록
                 </h2>
               </div>
               <div className="modal-body">
                 <div>
                   <div className="mb-3">
                     <label htmlFor="name" className="form-label">
-                      Name
+                      이름 Name
                     </label>
                     <input
                       type="text"
@@ -415,7 +263,7 @@ function App() {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="gender" className="form-label">
-                      Gender
+                      성별 Gender
                     </label>
                     <select
                       id="gender"
@@ -433,7 +281,7 @@ function App() {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="minutes" className="form-label">
-                      Minutes
+                      분 Minutes
                     </label>
                     <input
                       type="range"
@@ -463,7 +311,7 @@ function App() {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="seconds" className="form-label">
-                      Seconds
+                      초 Seconds
                     </label>
                     <input
                       type="range"
@@ -493,7 +341,7 @@ function App() {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="milliseconds" className="form-label">
-                      Milliseconds
+                      밀리세컨드 Milliseconds
                     </label>
                     <input
                       type="range"
@@ -525,7 +373,7 @@ function App() {
                 </div>
               </div>
               <div className="modal-footer">
-                <div className="mr-3">
+                <div>
                   <button
                     type="button"
                     className="btn btn-secondary"
@@ -548,6 +396,7 @@ function App() {
                     className="btn btn-primary"
                     onClick={handleClick}
                     data-bs-dismiss="modal"
+                    style={{ marginLeft: "10px" }}
                   >
                     Save
                   </button>
@@ -558,9 +407,9 @@ function App() {
         </MyWindowPortal>
       )}
 
-      <div className="container d-flex justify-content-around">
+      <div className="container-lg d-flex justify-content-between">
         <div>
-          <div className="text-center fw-bold">형제 Brother</div>
+          <h1 className="text-center fw-bold">형제 Brother</h1>
           {brotherRecords.map((record, index) => {
             console.log(`BRO : ${record.name} (${record.time})`);
             return (
@@ -576,7 +425,7 @@ function App() {
         </div>
 
         <div>
-          <div className="text-center fw-bold">자매 Sister</div>
+          <h1 className="text-center fw-bold">자매 Sister</h1>
           {sisterRecords.map((record, index) => {
             console.log(`SIS : ${record.name} (${record.time})`);
             return (
